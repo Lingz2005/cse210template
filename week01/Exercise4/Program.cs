@@ -1,9 +1,73 @@
 using System;
+using System.Collections.Generic;
 
-class Program
+List<int> numbers = new List<int>();
+
+Console.WriteLine("Enter a list of numbers, type 0 when finished.");
+
+int number;
+
+do
 {
-    static void Main(string[] args)
+    Console.Write("Enter number: ");
+    number = int.Parse(Console.ReadLine());
+
+    if (number != 0)
     {
-        Console.WriteLine("Hello World! This is the Exercise4 Project.");
+        numbers.Add(number);
     }
+
+} while (number != 0);
+
+if (numbers.Count > 0)
+{
+    int sum = 0;
+    int largest = numbers[0];
+    int smallestPositive = 0;
+
+    foreach (int value in numbers)
+    {
+        sum += value;
+
+        if (value > largest)
+        {
+            largest = value;
+        }
+
+        if (value > 0)
+        {
+            if (smallestPositive == 0 || value < smallestPositive)
+            {
+                smallestPositive = value;
+            }
+        }
+    }
+
+    double average = (double)sum / numbers.Count;
+
+    Console.WriteLine($"The sum is: {sum}");
+    Console.WriteLine($"The average is: {average}");
+    Console.WriteLine($"The largest number is: {largest}");
+
+    if (smallestPositive > 0)
+    {
+        Console.WriteLine($"The smallest positive number is: {smallestPositive}");
+    }
+    else
+    {
+        Console.WriteLine("There are no positive numbers.");
+    }
+
+    numbers.Sort();
+
+    Console.WriteLine("The sorted list is:");
+
+    foreach (int value in numbers)
+    {
+        Console.WriteLine(value);
+    }
+}
+else
+{
+    Console.WriteLine("No numbers were entered.");
 }
